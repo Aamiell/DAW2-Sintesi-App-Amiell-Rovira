@@ -1,0 +1,50 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button color="secondary"></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Login</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+        <ion-row>
+            <ion-col size="8" offset="2">
+                <ion-item>
+                    <ion-label position="floating">Username</ion-label>
+                    <ion-input [(ngModel)]="username"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="8" offset="2">
+                <ion-item>
+                    <ion-label position="floating">Password</ion-label>
+                    <ion-input type="password" [(ngModel)]="password"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="8" offset="2">
+                <ion-button color="success" (click)="login()">
+                    Iniciar sessió
+                </ion-button>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="8" offset="2">
+                <ion-card color="danger" *ngIf="loginError">
+                    <ion-card-header style="text-align: center;">
+                        <ion-label>
+                            Error a l'iniciar sessió
+                        </ion-label>
+                    </ion-card-header>
+                    <ion-card-content style="text-align: center;">
+                        S'ha produit un error a l'iniciar sessió.
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

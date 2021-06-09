@@ -1,0 +1,25 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button color="secondary"></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Perfil</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-card style="text-align: center;">
+        <img src="../../../assets/img/formprofile1.jpg" />
+        <ion-card-header>
+            <ion-card-title>Nom d'usuari: {{session.user.username}}</ion-card-title>
+            <ion-card-subtitle>Nom: {{session.user.first_name}} Cognom: {{session.user.last_name}}</ion-card-subtitle>
+            <ion-card-subtitle>Correu electronic: {{session.user.email}}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-button color="warning" (click)="goToEditProfile()">
+                <ion-icon name="create-outline"></ion-icon>Editar Perfil
+            </ion-button>
+        </ion-card-content>
+
+    </ion-card>
+</ion-content>

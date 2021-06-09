@@ -1,0 +1,28 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button color="secondary"></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Llistat dels recursos</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <ion-list *ngFor="let recurs of recursos; let i=index">
+                    <ion-item>
+                        <ion-label>{{recurs.titol}}</ion-label>
+                        <ion-button *ngIf="session.user.username != ''" color="secondary" [routerLink]='[recurs.id]'>
+                            <ion-icon name="eye-outline"></ion-icon>
+                        </ion-button>
+                        <ion-button *ngIf="session.user.username != ''" color="danger" (click)="deleteRecurs(recurs.id)">
+                            <ion-icon name="trash-outline"></ion-icon>
+                        </ion-button>
+                    </ion-item>
+                </ion-list>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

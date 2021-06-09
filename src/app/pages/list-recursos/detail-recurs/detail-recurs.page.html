@@ -1,0 +1,46 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button color="secondary"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Detalls de: {{recurs.titol}}</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-card>
+        <img *ngIf="[(recurs.tipus_recurs)] == 'infografia'" [src]="'http://localhost/sintesi/api_private/imatge/'+recurs.id+'?token='+session.user.token" />
+        <video *ngIf="[(recurs.tipus_recurs)] == 'video'" src="http://localhost/sintesi/api_private/imatge/'+recurs.id+'?token='+session.user.token" controls class="card-img-top " alt=" "></video>
+        <div *ngIf="[(recurs.tipus_recurs)]=='link_video'">
+            <div id="player"></div>
+            <div class="botons">
+                <button type="button " class="btn btn-outline-success " id="btstart " onclick="play() "><i class="fas fa-play-circle "></i>&nbsp;PLAY</button>
+                <button type="button " class="btn btn-outline-danger " id="bstop " onclick="stop() "><i class="fas fa-stop-circle "></i>&nbsp;STOP</button>
+                <input type="range " id="volumen " onclick="volumen() ">
+            </div>
+        </div>
+        <img *ngIf="[(recurs.tipus_recurs)]=='pissarra' " src="data:image/png;base64,{{recurs.pissarra}}" />
+        <ion-card-header>
+            <ion-card-title>{{recurs.titol}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            {{recurs.descripcio}}
+        </ion-card-content>
+        <ion-card-content [innerHTML]="recurs.explicacio ">
+        </ion-card-content>
+        <ion-card-content>
+            <h2><b>Arxius Adjunts</b></h2>
+        </ion-card-content>
+        <ion-list>
+            <!--*ngFor="let adjunt of adjunts; let i=index"-->
+            <ion-item>
+                <ion-label>Nom Arxiu
+                    <!--{{adjunt.nom_original}}-->
+                </ion-label>
+                <ion-button color="secondary">
+                    <ion-icon name="download-outline"></ion-icon>
+                </ion-button>
+            </ion-item>
+        </ion-list>
+    </ion-card>
+</ion-content>
