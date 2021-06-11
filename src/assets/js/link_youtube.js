@@ -1,31 +1,77 @@
-var tag = document.createElement('script');
+// var tag = document.createElement('script');
 
-tag.src = "https://www.youtube.com/iframe_api";
-var firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+// tag.src = "https://www.youtube.com/iframe_api";
+// var firstScriptTag = document.getElementsByTagName('script')[0];
+// firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 var player;
+var videoid;
 
 //Desactivem tots el botons y amagem la part del video
-document.getElementById('linkvideo').disabled = true;
-document.getElementById('volumen').disabled = true;
-document.getElementById('btstart').disabled = true;
-document.getElementById('bstop').disabled = true;
-document.getElementById('altrevideo').disabled = true;
-document.getElementById('player').style.display = "none"
+// document.getElementById('linkvideo').disabled = true;
+// document.getElementById('volumen').disabled = true;
+// document.getElementById('btstart').disabled = true;
+// document.getElementById('bstop').disabled = true;
+// document.getElementById('altrevideo').disabled = true;
+// document.getElementById('player').style.display = "none"
+
+// function loadYoutubePlayer(linkvideo) {
+//     //Agafem el que hem introduit al input
+//     // var linkvideo = document.getElementById("link").value;
+//     //Retallem del caracter 32 al 43 es a dir la id del video
+//     var linkvideoid = linkvideo.substring(32, 43);
+//     console.log(linkvideoid);
+//     player = new YT.Player('player', {
+//         playerVars: {
+//             'controls': 0
+//         },
+//         height: '360',
+//         width: '100%',
+//         videoId: linkvideoid,
+//         events: {
+//             'onReady': stop,
+//             'onStateChange': onPlayerStateChange
+//         }
+//     });
+//     console.log(player);
+
+// }
+function loadYoutubePlayer(linkvideo) {
+
+    // player.loadVideoById(linkvideo, 0, "large");
+    // document.getElementById('player').style = 'display: block;height:360px;width:100%';
+    // player.playVideo();
+    if (typeof YT === 'object') {
+        player = new YT.Player('player', {
+            playerVars: {
+                'controls': 0
+            },
+            height: '360',
+            width: '100%',
+            videoId: videoid, //https://www.youtube.com/watch?v=M7lc1UVf-VE
+            // videoId: "https://www.youtube.com/watch?v=dzsuE5ugxf4",
+            events: {
+                'onReady': stop,
+                'onStateChange': onPlayerStateChange
+            }
+        });
+    }
+}
 
 function onYouTubeIframeAPIReady() {
-    //Agafem el que hem introduit al input
-    var linkvideo = value = "<?php echo $recursos['link']; ?>";
-    //Retallem del caracter 32 al 43 es a dir la id del video
-    var linkvideoid = linkvideo.substring(32, 43);
+    console.log("AQUIIIIIIIIIIIIIIIIIIIIII")
+        //Agafem el que hem introduit al input
+        //var linkvideo = ""; // document.getElementById("link").value;
+        //Retallem del caracter 32 al 43 es a dir la id del video
+        //var linkvideoid = ""; //linkvideo.substring(32, 43);
     player = new YT.Player('player', {
         playerVars: {
             'controls': 0
         },
         height: '360',
         width: '100%',
-        videoId: linkvideoid,
+        videoId: videoid, //https://www.youtube.com/watch?v=M7lc1UVf-VE
+        // videoId: "https://www.youtube.com/watch?v=dzsuE5ugxf4",
         events: {
             'onReady': stop,
             'onStateChange': onPlayerStateChange
@@ -38,7 +84,7 @@ function veureVideo() {
     //Fem visible la part on esta el video
     document.getElementById('player').style.display = "block"
         //Agafem el que hem introduit al input
-    var linkvideo = value = "<?php echo $recursos['link']; ?>";
+    var linkvideo = document.getElementById("link").value;
     //Retallem del caracter 32 al 43 es a dir la id del video
     var videoid = linkvideo.substring(32, 43);
     //Carregem el video que li hem pasat

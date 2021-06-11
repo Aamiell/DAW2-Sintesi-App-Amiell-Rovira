@@ -25,6 +25,7 @@ export class Recurs {
         this._propietari = "";
         this._data_creacio = "";
         this._hora_creacio = "";
+        this._cached = false;
     }
 
     get id(): number {

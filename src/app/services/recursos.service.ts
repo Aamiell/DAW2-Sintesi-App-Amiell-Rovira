@@ -80,8 +80,12 @@ export class RecursosService {
   }
 
   getRecursFromHttp(idx: number) {
+    console.log(idx);
     var recurs: Recurs = new Recurs();
-    this.recurs.pipe(take(1)).subscribe(
+    this.recursos.pipe(take(1)).subscribe(
+      (recs: Recurs[]) => {
+        recurs = recs[idx-1];
+      }
     );
     console.log(recurs);
     if (recurs.cached) {
@@ -99,14 +103,15 @@ export class RecursosService {
             recurs.propietari = response.propietari;
             recurs.pissarra = response.pissarra;
             recurs.link = response.link;
+            recurs.cached = true;
 
-            this.recurs.pipe(take(1)).subscribe(
-              (origRecurs: Recurs) => {
-                origRecurs[idx] = this.recurs;
-                this._recurs.next(origRecurs);
+            this.recursos.pipe(take(1)).subscribe(
+              (originalRecursos: Recurs[]) => {
+                originalRecursos[idx-1] = recurs;
+                this._recursos.next(originalRecursos);
+                this._recurs.next(originalRecursos[idx-1]);
               }
             );
-            this._recurs.next(recurs);
           }
         );
       }

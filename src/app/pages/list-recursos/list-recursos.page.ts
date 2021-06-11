@@ -10,6 +10,7 @@ import { SessionService } from 'src/app/services/session.service';
 })
 export class ListRecursosPage implements OnInit {
 
+public searchrecursos: string ="";
   public recursos: Recurs[] = [];
   constructor(private recursosService: RecursosService, private session: SessionService) {
     this.recursosService.retrieveRecursosFromHttp();
@@ -21,6 +22,13 @@ export class ListRecursosPage implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  searchRecursos(recurs: Recurs) {
+    if (this.searchrecursos == "") return true;
+    if (recurs.titol.toUpperCase().includes(this.searchrecursos.toUpperCase())) return true;
+    // if (recurs.desc.toUpperCase().includes(this.searchrecursos.toUpperCase())) return true;
+    else return false;
   }
 
   deleteRecurs(id:number) {

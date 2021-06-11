@@ -11,16 +11,19 @@
     <ion-grid>
         <ion-row>
             <ion-col>
-                <ion-list *ngFor="let recurs of recursos; let i=index">
-                    <ion-item>
-                        <ion-label>{{recurs.titol}}</ion-label>
-                        <ion-button *ngIf="session.user.username != ''" color="secondary" [routerLink]='[recurs.id]'>
-                            <ion-icon name="eye-outline"></ion-icon>
-                        </ion-button>
-                        <ion-button *ngIf="session.user.username != ''" color="danger" (click)="deleteRecurs(recurs.id)">
-                            <ion-icon name="trash-outline"></ion-icon>
-                        </ion-button>
-                    </ion-item>
+                <ion-searchbar [(ngModel)]="searchrecursos"></ion-searchbar>
+                <ion-list>
+                    <div *ngFor="let recurs of recursos; let i=index">
+                        <ion-item *ngIf="searchRecursos(recurs)">
+                            <ion-label>{{recurs.titol}}</ion-label>
+                            <ion-button *ngIf="session.user.username != ''" color="secondary" [routerLink]='[recurs.id]'>
+                                <ion-icon name="eye-outline"></ion-icon>
+                            </ion-button>
+                            <ion-button *ngIf="session.user.username != ''" color="danger" (click)="deleteRecurs(recurs.id)">
+                                <ion-icon name="trash-outline"></ion-icon>
+                            </ion-button>
+                        </ion-item>
+                    </div>
                 </ion-list>
             </ion-col>
         </ion-row>
